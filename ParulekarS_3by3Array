@@ -1,0 +1,188 @@
+/*
+ * ThreeByThreeArray.java
+ * by Simrun Parulekar
+ * 2/1/21
+ * period 2
+ */
+
+import java.util.Scanner;
+public class ThreeByThreeArrayExercise {
+   
+   public static void main(String[] args){
+      
+      // create an array of integers 3 x 3
+      int[][] my3x3 = new int[3][3];
+      // Print the array
+      print2DArray("empty array", my3x3);
+      
+      // Fill the array with integers
+      Scanner kbReader = new Scanner(System.in);
+      fillArray(kbReader, my3x3);
+      print2DArray("filled array", my3x3);
+      
+      // print sums of each row
+      printSumsOfRows(my3x3);
+      
+      // print sums of each column
+      printSumsOfColumns(my3x3);
+      
+      // print sum diagonal from Upper-left to Lower-right
+      printSumULtoLR(my3x3);
+      
+      // print sum diagonal from Upper-right to Lower-left
+      printSumURtoLL(my3x3);
+      
+      // print all same in a row
+      printAllSameInRow(my3x3);
+      
+      // print all same in a column
+      printAllSameInColumn(my3x3);
+      
+      // print all same From Upper-left to Lower-right
+      
+      // print all same from Upper-right to Lower-left
+   }
+   
+   public static void print2DArray(String title, int[][] a){
+      System.out.println(title);
+      for(int row = 0; row < a.length; row++){
+         for(int col = 0; col < a[row].length; col++){
+            System.out.print("\t" + a[row][col]);
+         }
+         System.out.println();
+      }
+      System.out.println();
+   }
+   
+   public static void fillArray(Scanner kb, int[][] a){
+      for(int row = 0; row < a.length; row++){
+         for(int col = 0; col < a[row].length; col++){
+            System.out.print("Enter value for row " + row +
+                    " and col " + col + ": ");
+            a[row][col] = kb.nextInt();
+         }
+      }
+      System.out.println();
+   }
+   
+   public static void printSumsOfRows(int[][] a){
+      // Part 1: Use nested for loop to print the sum of each row
+      int sum = 0; 
+       for(int row = 0; row < a.length; row++){
+         for(int col = 0; col < a[row].length; col++){
+            sum+=a[row][col];
+         }
+         System.out.println("Total for row " + row + ":" + sum);
+         sum = 0; 
+      }
+
+	  
+      System.out.println();
+   }
+   
+   public static void printSumsOfColumns(int[][] a){
+      // assume a is square, meaning you can use length of 3
+      // Part 2: Use nested for loop to print the sum of each column
+	   int columnSum = 0; 
+       for(int col = 0; col < a.length; col++){
+         for(int row = 0; row < a[col].length; row++){
+            columnSum+=a[row][col];
+         }
+         System.out.println("Total for column " + col + ":" + columnSum);
+         columnSum = 0; 
+      }
+
+      System.out.println();
+   }
+   
+   public static void printSumULtoLR(int[][] a){
+      // Part 3: Use nested for loop to find the sum upper-left to lower-right
+	  // then print it
+			int leftToRight = 0; 
+         for (int row = 0; row < a.length; row++) {
+            for (int col = 0; col < a[row].length; col++){
+            if (row == col) {
+            leftToRight += a[row][col]; 
+            }
+            }
+            }
+            System.out.println("Total from upper-left to lower-right is: " + leftToRight); 
+      System.out.println();
+   }
+   
+   public static void printSumURtoLL(int[][] a){
+   // Part 4: Use nested for loop to find the sum upper-right to lower-left
+   // then print it
+    int rightToLeft = 0;
+    for (int col = 2; col!=-1; col--){
+      for (int row = 0; row < a[col].length; row++){
+         if(row == col) {
+         rightToLeft += a[row][col]; 
+         }
+         }
+         }
+         System.out.println("Total from upper-left to lower-right is: " + rightToLeft);
+      System.out.println();
+   }
+   
+   public static void printAllSameInRow(int[][] a){
+      // Part 5: use nested for loop to print whether each row has elements 
+      // all the same.
+      boolean same;  
+    for (int row = 0; row < a.length; row++) {
+      same = true; 
+      for (int col = 0; col < 2; col ++) {
+            if (a[row][col] != a[row][col+1]) {
+            same = false; 
+            } 
+      } 
+      
+      System.out.println("Elements in row" + row + "all the same is " + same);
+   }
+   System.out.println(); 
+   }
+   
+   public static void printAllSameInColumn(int[][] a){
+   boolean same; 
+   for (int col = 0; col < a.length; col ++) {
+      same = true; 
+      for(int row = 0; row < 2; row++) {
+         if (a[row][col] != a[row + 1][col]) {
+            same = false; 
+            } 
+         } 
+         System.out.println("Elements in col " + col + "all the same is " + same); 
+         }    
+                 // assume array is 3 x 3
+      // Part 6: use nested for loop to print whether each col has elements 
+      // all the same.
+	  
+      System.out.println();
+   }
+   
+   public static void printDiagonalsAllSame(int[][] a){
+      boolean same = true; 
+      for ( int row = 0; row < 2; row++) { 
+         same = true; 
+         int col = row; 
+         if ( a[row][col] != a[row +1][col + 1]) 
+            same = false; 
+            } 
+            System.out.println("Elements in upper left to lower right are same: " + same); 
+            
+      for (int row = 0; row < 2; row++) { 
+         same = true; 
+         int col = -1 * row + 2; 
+         if( a[row][col] != a[row + 1][col -1]) 
+            same = false; 
+            
+            } 
+            System.out.println("Elements in upper right to lower left are same: " + same); 
+      // assume array is 3 x 3
+	  // Part 7: use nested for loop to print whether the upper-left to lower-right
+	  // diagonal has all the same values.
+	  //
+	  // Then, use nested for loop to print whether the upper-right to lower-left
+	  // diagonal has all the same values.
+   }
+}
